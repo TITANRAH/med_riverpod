@@ -15,6 +15,7 @@ class UserLoginDatasource extends UserDataSource {
 
   @override
   Future<User> getUser(String userName, String password) async {
+    print('entro a la llamada http');
     final response = await dioLogin.post(
       '/api/Login',
       data: jsonEncode(
@@ -25,7 +26,10 @@ class UserLoginDatasource extends UserDataSource {
       ),
     );
 
+    print('response $response');
     final userResponse = UserResponse.fromJson(response.data);
+
+    print('userResponse $userResponse');
 
     final User user =
         UserMapper.userEntity(userResponse.userData, userResponse.token);

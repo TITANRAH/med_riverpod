@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:medismart_river/domain/entities/user_services.dart';
 import 'package:medismart_river/infrastructure/models/user_data_response.dart';
 import '../../domain/entities/user.dart';
@@ -28,7 +29,7 @@ class UserMapper {
         habits: userDataResponse.habits,
         status: userDataResponse.status,
         idCliente: userDataResponse.idCliente,
-        userServices: userDataResponse.homeServices.map((e) => UserMapper.userServicesEntity(e)).toList(),
+        userServices: userDataResponse.homeServices.isNotEmpty ? userDataResponse.homeServices.map((e) => UserMapper.userServicesEntity(e)).toList() : null,
       );
 
   static UserServices userServicesEntity(HomeService userDataResponse) =>

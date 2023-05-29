@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../domain/entities/user.dart';
 import '../../providers/providers.dart';
 
@@ -17,21 +18,21 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
     super.initState();
 
     ref.read(userInfoProvider.notifier).loadUser('16724918-3', 'Aa123456');
-
-   
   }
 
   @override
   Widget build(BuildContext context) {
-    final User user = ref.watch(userInfoProvider);
+    final User? user = ref.watch(userInfoProvider);
+
+    if (user == null || user.userServices == null) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
 
     return Scaffold(
       body: Center(
-        child: Column(children: [
-       ...user.userServices!.map((e) => Text(e.texto!))
-        ],),
-      ),
-      
+          child: Column(
+        children: [...user.userServices!.map((e) => Text(e.texto!))],
+      )),
     );
   }
 }

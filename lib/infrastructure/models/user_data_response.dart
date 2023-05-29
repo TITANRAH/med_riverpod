@@ -13,7 +13,7 @@ class UserData {
   final String phoneNumber;
   final String mobilePhoneNumber;
   final DateTime birthDate;
-  final String gender;
+  final String? gender;
   final dynamic address;
   final String foresight;
   final int timeZone;
@@ -76,7 +76,7 @@ class UserData {
         status: json["status"],
         idCliente: json["idCliente"],
         homeServices: List<HomeService>.from(
-            json["homeServices"].map((x) => HomeService.fromJson(x))),
+            json["homeServices"]!.map((x) => HomeService.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
